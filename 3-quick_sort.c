@@ -22,6 +22,7 @@ void quick_sort(int *array, size_t size)
  * @array: the array to be sorted
  * @start: start index of the array
  * @end: end index of the array
+ * @size: size of the array to print
  */
 
 void quickSort(int *array, int start, int end, size_t size)
@@ -42,6 +43,7 @@ void quickSort(int *array, int start, int end, size_t size)
  * @arr: the array to be partitioned
  * @start: start index of the array
  * @end: end index of the array
+ * @size: size of the array to print
  *
  * Return: Pivot index
  */
