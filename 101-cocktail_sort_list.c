@@ -25,19 +25,18 @@ void swap_nodes(listint_t *left, listint_t *right)
  * loop_forward - _
  *
  * @list: _
+ * @temp: _
  * @sorted: _
 */
-void loop_forward(listint_t **list, bool *sorted)
+void loop_forward(listint_t **list, listint_t **temp, bool *sorted)
 {
-	listint_t *temp = *list;
-
-	while (temp->next)
+	while ((*temp)->next)
 	{
-		if (temp->n > temp->next->n)
+		if ((*temp)->n > (*temp)->next->n)
 		{
-			listint_t *n = temp->next;
+			listint_t *n = (*temp)->next;
 
-			swap_nodes(temp, n);
+			swap_nodes(*temp, n);
 
 			if (!n->prev)
 				*list = n;
@@ -46,7 +45,7 @@ void loop_forward(listint_t **list, bool *sorted)
 			print_list(*list);
 		}
 		else
-			temp = temp->next;
+			*temp = (*temp)->next;
 	}
 }
 
@@ -54,28 +53,27 @@ void loop_forward(listint_t **list, bool *sorted)
  * loop_backward - _
  *
  * @list: _
+ * @temp: _
  * @sorted: _
 */
-void loop_backward(listint_t **list, bool *sorted)
+void loop_backward(listint_t **list, listint_t **temp, bool *sorted)
 {
-	listint_t *temp = *list;
-
-	while (temp->prev)
+	while ((*temp)->prev)
 	{
-		if (temp->n < temp->prev->n)
+		if ((*temp)->n < (*temp)->prev->n)
 		{
-			listint_t *p = temp->prev;
+			listint_t *p = (*temp)->prev;
 
-			swap_nodes(p, temp);
+			swap_nodes(p, *temp);
 
-			if (!temp->prev)
-				*list = temp;
+			if (!(*temp)->prev)
+				*list = *temp;
 
 			*sorted = false;
 			print_list(*list);
 		}
 		else
-			temp = temp->prev;
+			*temp = (*temp)->prev;
 	}
 }
 
@@ -87,16 +85,19 @@ void loop_backward(listint_t **list, bool *sorted)
 */
 void cocktail_sort_list(listint_t **list)
 {
+	listint_t *temp;
 	bool sorted = false;
 
 	if (!list || !(*list))
 		return;
 
+	temp = *list;
+
 	while (!sorted)
 	{
 		sorted = true;
 
-		loop_forward(list, &sorted);
-		loop_backward(list, &sorted);
+		loop_forward(list, &temp, &sorted);
+		loop_backward(list, &temp, &sorted);
 	}
 }
