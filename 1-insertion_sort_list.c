@@ -1,24 +1,24 @@
 #include "sort.h"
 
 /**
- * swap - swaps the positions of the two nodes in the list.
+ * swap_nodes - swaps the positions of the two nodes in the list.
  *
- * @green: first node.
- * @red: second node.
+ * @left: left node.
+ * @right: right node.
  */
-void swap(listint_t *green, listint_t *red)
+void swap_nodes(listint_t *left, listint_t *right)
 {
-	if (green->prev)
-		green->prev->next = red;
+	if (left->prev)
+		left->prev->next = right;
 
-	if (red->next)
-		red->next->prev = green;
+	if (right->next)
+		right->next->prev = left;
 
-	green->next = red->next;
-	red->prev = green->prev;
+	left->next = right->next;
+	right->prev = left->prev;
 
-	red->next = green;
-	green->prev = red;
+	right->next = left;
+	left->prev = right;
 }
 
 /**
@@ -29,27 +29,27 @@ void swap(listint_t *green, listint_t *red)
  */
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *red, *temp;
+	listint_t *unsorted, *temp;
 
 	if (!list || !(*list))
 		return;
 
-	red = (*list)->next;
+	unsorted = (*list)->next;
 
-	while (red)
+	while (unsorted)
 	{
-		temp = red->next;
+		temp = unsorted->next;
 
-		while (red->prev && red->n < red->prev->n)
+		while (unsorted->prev && unsorted->n < unsorted->prev->n)
 		{
-			swap(red->prev, red);
+			swap_nodes(unsorted->prev, unsorted);
 
-			if (!red->prev)
-				*list = red;
+			if (!unsorted->prev)
+				*list = unsorted;
 
 			print_list(*list);
 		}
 
-		red = temp;
+		unsorted = temp;
 	}
 }
