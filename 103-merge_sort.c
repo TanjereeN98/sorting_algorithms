@@ -22,9 +22,9 @@ void merge(
 	size_t l = 0, r = 0, m = 0;
 
 	printf("Merging...\n");
-	printf("[Left]: ");
+	printf("[left]: ");
 	print_array(left, left_size);
-	printf("[Right]: ");
+	printf("[right]: ");
 	print_array(right, right_size);
 
 	if (merging_array_size < left_size + right_size)
