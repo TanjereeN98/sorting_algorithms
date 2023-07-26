@@ -44,17 +44,11 @@ void merge(
 		}
 	}
 
-	if (l == left_size)
-	{
-		for (; r < right_size; m++, r++)
-			merging_array[m] = right[r];
-	}
+	for (; l < left_size; m++, l++)
+		merging_array[m] = left[l];
 
-	if (r == right_size)
-	{
-		for (; l < left_size; m++, l++)
-			merging_array[m] = left[l];
-	}
+	for (; r < right_size; m++, r++)
+		merging_array[m] = right[r];
 
 	printf("[Done]: ");
 	print_array(merging_array, left_size + right_size);
